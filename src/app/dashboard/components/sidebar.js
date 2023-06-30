@@ -21,8 +21,8 @@ export default function Sidebar({ children }) {
     <aside
       ref={sidebarRef}
       className={cn(
-        'fixed left-0 z-30 h-full w-full max-w-[300px] bg-white',
-        'border-r border-neutral-300 transition duration-200',
+        'fixed left-0 z-30 h-full w-full max-w-[300px] bg-amber-50',
+        'transition duration-200',
         'md:relative md:left-auto md:top-auto',
         isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       )}
