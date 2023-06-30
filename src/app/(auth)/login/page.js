@@ -1,13 +1,14 @@
 'use client';
 
-import Button from '@/components/button';
-import Input from '@/components/input';
-import InputError from '@/components/input-error';
-import Label from '@/components/label';
+import Logo from '@/components/logo';
+import Button from '@/components/ui/button';
+import Input from '@/components/ui/input';
+import InputError from '@/components/ui/input-error';
+import Label from '@/components/ui/label';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-
 import z from 'zod';
 
 const LoginSchema = z.object({
@@ -48,9 +49,7 @@ export default function Page() {
   return (
     <section className="w-full max-w-[450px] space-y-8 rounded-2xl bg-white p-8">
       <header className="space-y-8 text-center">
-        <h1 className="inline border-l-4 border-amber-400 pl-2 text-base font-semibold uppercase md:text-2xl">
-          Manage Courses
-        </h1>
+        <Logo />
         <div>
           <h2 className="font-semibold uppercase">Sign In</h2>
           <p className="text-sm text-neutral-500">Enter your credentials to access your account</p>
