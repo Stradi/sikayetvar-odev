@@ -10,7 +10,7 @@ export default function Layout({ children }) {
       </Sidebar>
       <section className="w-full md:overflow-y-auto">
         <NavigationBar />
-        <div>{children}</div>
+        <div className="p-8">{children}</div>
       </section>
     </main>
   );

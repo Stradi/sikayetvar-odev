@@ -113,3 +113,13 @@ export function SettingsIcon(props) {
     </BaseIcon>
   );
 }
+
+export function UsersIcon(props) {
+  return (
+    <BaseIcon {...props}>
+      <path d="M14 19a6 6 0 0 0-12 0" />
+      <circle cx="8" cy="9" r="4" />
+      <path d="M22 19a6 6 0 0 0-6-6 4 4 0 1 0 0-8" />
+    </BaseIcon>
+  );
+}
