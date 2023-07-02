@@ -88,7 +88,21 @@ export default function Page() {
         }
       />
       <main className="grow overflow-y-auto">
-        <StudentsTable users={users} />
+        <StudentsTable
+          users={users}
+          onUserUpdated={(user) => {
+            setUsers((prevUsers) => {
+              const index = prevUsers.findIndex((u) => u.id === user.id);
+              if (index === -1) {
+                return prevUsers;
+              }
+
+              const newUsers = [...prevUsers];
+              newUsers[index] = user;
+              return newUsers;
+            });
+          }}
+        />
       </main>
       <footer className="ml-auto">
         <div className="flex items-center gap-8">

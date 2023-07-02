@@ -1,7 +1,8 @@
-import { EditIcon, TrashIcon } from '@/components/icons';
+import { TrashIcon } from '@/components/icons';
 import Button from '@/components/ui/button';
+import EditStudentDialog from './edit-student-dialog';
 
-export default function StudentsTable({ users }) {
+export default function StudentsTable({ users, onUserUpdated, onUserDeleted }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-full max-w-full text-left lg:table-fixed">
@@ -61,9 +62,15 @@ export default function StudentsTable({ users }) {
                 </td>
                 <td>{user.company.name}</td>
                 <td className="flex gap-1">
-                  <Button variant="anchor">
-                    <EditIcon />
-                  </Button>
+                  <EditStudentDialog
+                    user={user}
+                    onUserUpdated={(data) => {
+                      onUserUpdated({
+                        ...data,
+                        id: user.id,
+                      });
+                    }}
+                  />
                   <Button variant="anchor">
                     <TrashIcon />
                   </Button>
