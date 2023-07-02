@@ -2,6 +2,7 @@ import { BookmarkIcon, GraduationCapIcon, ReceiptIcon, UsersIcon } from '@/compo
 import Card from '@/components/ui/card';
 import { cn } from '@/utils/tw';
 import Link from 'next/link';
+import SectionHeader from './components/section-header';
 
 const OverviewData = [
   {
@@ -41,12 +42,10 @@ const OverviewData = [
 export default function Page() {
   return (
     <section className="space-y-8">
-      <header>
-        <h1 className="text-3xl font-bold">Overview</h1>
-        <p className="text-gray-500">
-          Welcome to your dashboard. Here, you can see all the important information you need to know.
-        </p>
-      </header>
+      <SectionHeader
+        title="Overview"
+        subtitle="Welcome to your dashboard. Here, you can see all the important information you need to know."
+      />
       <main>
         <div className="grid grid-cols-4 gap-4">
           {OverviewData.map((item, index) => (
