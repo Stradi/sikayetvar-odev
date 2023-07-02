@@ -57,7 +57,10 @@ export default function SidebarContent() {
   return (
     <section className="flex h-full flex-col space-y-8 p-4">
       <header className="flex h-12 items-center justify-between p-4">
-        <Link href="/">
+        <Link
+          href="/"
+          className="rounded-lg px-2 py-1 transition duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2"
+        >
           <Logo className="md:text-lg" />
         </Link>
         <button className="p-2 text-neutral-400 md:hidden" id="close-sidebar-button" onClick={() => setIsOpen(false)}>
@@ -92,10 +95,13 @@ export default function SidebarContent() {
                 key={index}
                 passHref
                 href={item.href}
-                className={cn('hover:bg-amber-100', isActive && 'bg-amber-300 !text-black hover:bg-amber-300')}
+                className={cn(
+                  'hover:bg-amber-100',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2',
+                  isActive && 'bg-amber-300 !text-black hover:bg-amber-300'
+                )}
               >
                 <i className="col-span-2 col-start-4">{item.icon}</i>
-                {/* <XIcon className="col-span-2 col-start-4" /> */}
                 <p
                   className="
                   col-span-6 col-start-6
