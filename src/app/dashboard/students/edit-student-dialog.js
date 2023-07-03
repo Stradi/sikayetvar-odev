@@ -96,6 +96,7 @@ export default function EditStudentDialog({ user, onUserUpdated }) {
               type="text"
               placeholder="Jon Snow"
               defaultValue={`${user.firstName} ${user.lastName}`}
+              autoComplete="name"
               {...register('name')}
             />
             {errors.name && <InputError>{errors.name.message}</InputError>}
@@ -108,6 +109,7 @@ export default function EditStudentDialog({ user, onUserUpdated }) {
               type="email"
               placeholder="jon@snow.com"
               defaultValue={user.email}
+              autoComplete="email"
               {...register('email')}
             />
             {errors.email && <InputError>{errors.email.message}</InputError>}
@@ -120,6 +122,7 @@ export default function EditStudentDialog({ user, onUserUpdated }) {
               type="tel"
               placeholder="+90 555 555 55 55"
               defaultValue={user.phone}
+              autoComplete="tel"
               {...register('phone')}
             />
             {errors.phone && <InputError>{errors.phone.message}</InputError>}
@@ -132,6 +135,7 @@ export default function EditStudentDialog({ user, onUserUpdated }) {
               type="url"
               placeholder="www.jonsnow.com"
               defaultValue={user.domain}
+              autoComplete="url"
               {...register('domain')}
               onBlur={(e) => {
                 // Here, we can add the protocol if the user didn't added it.
@@ -167,6 +171,7 @@ export default function EditStudentDialog({ user, onUserUpdated }) {
               type="text"
               placeholder="Night's Watch"
               defaultValue={user.company.name}
+              autoComplete="organization"
               {...register('company.name')}
             />
             {errors.company && errors.company.name && <InputError>{errors.company.name.message}</InputError>}

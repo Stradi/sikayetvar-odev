@@ -78,17 +78,31 @@ export default function AddStudentDialog({ onUserAdded }) {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 [&>*]:flex [&>*]:flex-col [&>*]:gap-2">
           <div>
             <Label htmlFor="name">Name</Label>
-            <Input id="name" name="name" type="text" placeholder="Jon Snow" {...register('name')} />
+            <Input id="name" name="name" type="text" placeholder="Jon Snow" autoComplete="name" {...register('name')} />
             {errors.name && <InputError>{errors.name.message}</InputError>}
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" placeholder="jon@snow.com" {...register('email')} />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="jon@snow.com"
+              autoComplete="email"
+              {...register('email')}
+            />
             {errors.email && <InputError>{errors.email.message}</InputError>}
           </div>
           <div>
             <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" name="phone" type="tel" placeholder="+90 555 555 55 55" {...register('phone')} />
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="+90 555 555 55 55"
+              autoComplete="tel"
+              {...register('phone')}
+            />
             {errors.phone && <InputError>{errors.phone.message}</InputError>}
           </div>
           <div>
@@ -98,6 +112,7 @@ export default function AddStudentDialog({ onUserAdded }) {
               name="website"
               type="url"
               placeholder="www.jonsnow.com"
+              autoComplete="url"
               {...register('domain')}
               onBlur={(e) => {
                 try {
@@ -124,6 +139,7 @@ export default function AddStudentDialog({ onUserAdded }) {
               name="companyName"
               type="text"
               placeholder="Night's Watch"
+              autoComplete="organization"
               {...register('company.name')}
             />
             {errors.company && errors.company.name && <InputError>{errors.company.name.message}</InputError>}

@@ -27,7 +27,7 @@ const OverviewData = [
     valueColor: 'text-amber-800',
     bgColor: 'bg-amber-50',
     title: 'Payments',
-    value: '556,000₺',
+    value: '556K ₺',
   },
   {
     icon: <UsersIcon svgClassName="h-12 w-12 text-lime-400" />,
@@ -47,9 +47,14 @@ export default function Page() {
         subtitle="Welcome to your dashboard. Here, you can see all the important information you need to know."
       />
       <main>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {OverviewData.map((item, index) => (
-            <Link key={index} href={item.href} passHref>
+            <Link
+              key={index}
+              href={item.href}
+              passHref
+              className="rounded-lg transition duration-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2"
+            >
               <Card
                 className={cn(
                   'flex items-center justify-between',
@@ -61,7 +66,7 @@ export default function Page() {
                   {item.icon}
                   <p className={cn('font-medium', item.valueColor)}>{item.title}</p>
                 </div>
-                <p className={cn('text-4xl font-bold', item.valueColor)}>{item.value}</p>
+                <p className={cn('text-2xl font-bold xl:text-4xl', item.valueColor)}>{item.value}</p>
               </Card>
             </Link>
           ))}

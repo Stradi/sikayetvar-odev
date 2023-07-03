@@ -4,6 +4,7 @@ import { ChevronIcon } from '@/components/icons';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import useUpdateQueryParameters from '@/hooks/use-update-query-parameters';
+import { addUser, deleteUser, updateUser } from '@/lib/api';
 import debounce from 'lodash.debounce';
 import { useEffect, useMemo, useState } from 'react';
 import SectionHeader from '../components/section-header';
@@ -86,18 +87,17 @@ export default function Page() {
               onUserAdded={(data) => {
                 // Pagination, rows per page and search functionality will not work properly
                 // after adding a new user. This is because we are actually not saving the user
-                // to the database. We are just updating the state. On actual implementation,
-                // you should save the user to the database and it should return the newly created
-                // user with an id. Then you can add the user to the state to avoid re-fetching the
-                // users from the database.
-                setUsers((prevUsers) => {
-                  return [
-                    {
-                      id: prevUsers.length + 1,
-                      ...data,
-                    },
-                    ...prevUsers,
-                  ];
+                // to the database. We are just updating the state.
+                addUser(data).then((res) => {
+                  setUsers((prevUsers) => {
+                    return [
+                      {
+                        id: prevUsers.length + 1,
+                        ...res.data,
+                      },
+                      ...prevUsers,
+                    ];
+                  });
                 });
               }}
             />
@@ -108,27 +108,31 @@ export default function Page() {
         <StudentsTable
           users={users}
           onUserUpdated={(user) => {
-            setUsers((prevUsers) => {
-              const index = prevUsers.findIndex((u) => u.id === user.id);
-              if (index === -1) {
-                return prevUsers;
-              }
+            updateUser(user).then((res) => {
+              setUsers((prevUsers) => {
+                const index = prevUsers.findIndex((u) => u.id === res.data.id);
+                if (index === -1) {
+                  return prevUsers;
+                }
 
-              const newUsers = [...prevUsers];
-              newUsers[index] = user;
-              return newUsers;
+                const newUsers = [...prevUsers];
+                newUsers[index] = res.data;
+                return newUsers;
+              });
             });
           }}
           onUserDeleted={(user) => {
-            setUsers((prevUsers) => {
-              const index = prevUsers.findIndex((u) => u.id === user.id);
-              if (index === -1) {
-                return prevUsers;
-              }
+            deleteUser(user).then((res) => {
+              setUsers((prevUsers) => {
+                const index = prevUsers.findIndex((u) => u.id === res.data.id);
+                if (index === -1) {
+                  return prevUsers;
+                }
 
-              const newUsers = [...prevUsers];
-              newUsers.splice(index, 1);
-              return newUsers;
+                const newUsers = [...prevUsers];
+                newUsers.splice(index, 1);
+                return newUsers;
+              });
             });
           }}
         />

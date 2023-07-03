@@ -5,6 +5,7 @@ import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import Label from '@/components/ui/label';
+import { login } from '@/lib/api';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -43,7 +44,9 @@ export default function Page() {
     // e.g. send data to the authentication server, etc...
     // for demo purposes, we'll just redirect the user to the dashboard
 
-    router.push('/dashboard');
+    login(data).then(() => {
+      router.push('/dashboard');
+    });
   }
 
   return (
@@ -59,15 +62,21 @@ export default function Page() {
         <form className="space-y-4 [&>*]:flex [&>*]:flex-col [&>*]:gap-2" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" placeholder="jon@snow.com" {...register('email')} />
+            <Input type="email" id="email" placeholder="jon@snow.com" autoComplete="email" {...register('email')} />
             {errors.email && <InputError>{errors.email.message}</InputError>}
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input type="password" id="password" placeholder="*******" {...register('password')} />
+            <Input
+              type="password"
+              id="password"
+              placeholder="*******"
+              autoComplete="current-password"
+              {...register('password')}
+            />
             {errors.password && <InputError>{errors.password.message}</InputError>}
           </div>
-          <Button type="submit" className="w-full uppercase" disabled={Object.keys(errors).length > 0}>
+          <Button type="submit" className="w-full items-center uppercase" disabled={Object.keys(errors).length > 0}>
             Sign In
           </Button>
         </form>
