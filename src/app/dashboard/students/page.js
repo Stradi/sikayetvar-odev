@@ -7,6 +7,7 @@ import useUpdateQueryParameters from '@/hooks/use-update-query-parameters';
 import debounce from 'lodash.debounce';
 import { useEffect, useMemo, useState } from 'react';
 import SectionHeader from '../components/section-header';
+import AddStudentDialog from './add-student-dialog';
 import StudentsTable from './students-table';
 
 export default function Page() {
@@ -81,9 +82,25 @@ export default function Page() {
         cta={
           <div className="flex gap-2">
             <Input type="search" placeholder="Search..." className="w-56" onChange={onSearchTermChange} />
-            <Button>
-              <span>Add New Student</span>
-            </Button>
+            <AddStudentDialog
+              onUserAdded={(data) => {
+                // Pagination, rows per page and search functionality will not work properly
+                // after adding a new user. This is because we are actually not saving the user
+                // to the database. We are just updating the state. On actual implementation,
+                // you should save the user to the database and it should return the newly created
+                // user with an id. Then you can add the user to the state to avoid re-fetching the
+                // users from the database.
+                setUsers((prevUsers) => {
+                  return [
+                    {
+                      id: prevUsers.length + 1,
+                      ...data,
+                    },
+                    ...prevUsers,
+                  ];
+                });
+              }}
+            />
           </div>
         }
       />
