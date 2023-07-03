@@ -56,7 +56,7 @@ export default function StudentsTable({ users, onUserUpdated, onUserDeleted }) {
                   </a>
                 </td>
                 <td>
-                  <a href={`https://${user.domain}`} target="_blank" rel="noreferrer">
+                  <a href={user.domain} target="_blank" rel="noreferrer">
                     <span>{user.domain}</span>
                   </a>
                 </td>
