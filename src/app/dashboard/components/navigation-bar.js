@@ -7,7 +7,7 @@ export default function NavigationBar() {
   const [isOpen, setIsOpen] = useSidebarStore((state) => [state.isOpen, state.setIsOpen]);
 
   return (
-    <nav className="sticky top-0 h-12 border-b border-neutral-300">
+    <nav className="sticky top-0 z-20 h-12 border-b border-neutral-300 bg-white">
       <div className="flex h-full items-center justify-between p-1">
         <button className="text-neutral-400 md:hidden" id="close-sidebar-button" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <CloseSidebarIcon /> : <OpenSidebarIcon />}
