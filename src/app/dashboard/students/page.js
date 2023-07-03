@@ -119,6 +119,18 @@ export default function Page() {
               return newUsers;
             });
           }}
+          onUserDeleted={(user) => {
+            setUsers((prevUsers) => {
+              const index = prevUsers.findIndex((u) => u.id === user.id);
+              if (index === -1) {
+                return prevUsers;
+              }
+
+              const newUsers = [...prevUsers];
+              newUsers.splice(index, 1);
+              return newUsers;
+            });
+          }}
         />
       </main>
       <footer className="ml-auto">
@@ -167,7 +179,7 @@ export default function Page() {
             </Button>
             <Button
               variant="anchor"
-              disabled={users.length < rowsPerPage || isLoading}
+              disabled={isLoading || page * rowsPerPage + users.length >= totalUserCount}
               onClick={() => {
                 setPage(page + 1);
                 updateQueryParameters({ key: 'page', value: page + 1 });

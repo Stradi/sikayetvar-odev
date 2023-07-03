@@ -1,5 +1,5 @@
 import { TrashIcon } from '@/components/icons';
-import Button from '@/components/ui/button';
+import ConfirmationButton from '@/components/ui/confirmation-button';
 import EditStudentDialog from './edit-student-dialog';
 
 export default function StudentsTable({ users, onUserUpdated, onUserDeleted }) {
@@ -71,9 +71,14 @@ export default function StudentsTable({ users, onUserUpdated, onUserDeleted }) {
                       });
                     }}
                   />
-                  <Button variant="anchor">
+                  <ConfirmationButton
+                    variant="anchor"
+                    onConfirm={() => {
+                      onUserDeleted?.(user);
+                    }}
+                  >
                     <TrashIcon />
-                  </Button>
+                  </ConfirmationButton>
                 </td>
               </tr>
             );
